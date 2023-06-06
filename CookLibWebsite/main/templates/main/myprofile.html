@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Мой профиль</title>
+        <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    </head>
+    <body>
+        <div class="hhead">
+            <div id="header" title="На главную">
+                <a href="{% url 'house' %}"><ul>
+                    <p style="color: black;"> Cooking</p>
+                    <p style="color: rgb(0, 202, 67);">Library</p>
+                </ul></a>
+            </div>
+            <div id="header2">
+                <div id="header21">
+                    <a href="{% url 'profile_page' %}" title="Нажмите, чтобы перейти в свой профиль">Мой профиль</a>
+                </div>
+                <div id="header22" class="input-group flex-nowrap">
+                    <input type="search" class="form-control" placeholder="Введите название блюда" aria-describedby="addon-wrapping">
+                    <span class="input-group-text" id="search" width="100px">Поиск</span>
+                </div>
+            </div>
+            
+        </div>
+        <div style="margin-top: 300px;" id="KatRightPr">
+            <div style="text-align: center">
+                {% if request.user.is_authenticated %}
+                <h1 title="Имя и фамилия">{{user.first_name}} {{user.last_name}}</h1>
+                <p title="Никнейм">@{{user.username}}</p>
+                <p title="Почта">{{user.email}}</p>
+                {% endif %}
+            </div>
+            <form method="post">
+                {% csrf_token %}
+                <div id="KatRightPr1" style="width: 50%; margin-left: 420px">
+                    <p style="font-size: 20px; font-weight: 600;">Мои избранные рецепты</p>
+                    <ul>
+                        {% if request.user.is_authenticated %}
+                            {% for r in user.fav_recs.all %}
+                            <a href="{% url 'recipe' r.slug %}" style="text-decoration: none; text-decoration-color: #000000">{{r.title_recipe}}<br></a>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                </div> <br>
+            </form>
+        </div>
+
+    </body>
+</html>

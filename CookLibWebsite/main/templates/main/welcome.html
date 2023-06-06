@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Добро пожаловать!</title>
+        <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    </head>
+    <body>
+        <div id="main1">
+            <div id="block1" title="CookingLibrary"> 
+                <ul>
+                    <p> Cooking</p>
+                    <p style="color: rgb(0, 202, 67);">Library</p>
+                </ul>
+            </div>
+            <div id="block2">
+                <p>Добро пожаловать в CookingLibrary!
+                Здесь ты можешь найти совершенно любой рецепт. Войди или зарегистрируйся, чтобы узнать все секреты шикарных блюд:</p>
+            </div>
+            <div id="block3">
+                <ul>
+                    <a href="{% url 'authorization_page' %}"><button type="button" class="btn btn-outline-dark">Войти</button></a>
+                    <a href="{% url 'registration_page' %}"><button type="button" class="btn btn-outline-dark">Зарегистрироваться</button></a>
+                </ul>
+            </div>
+        </div>
+        <div id="aside">
+                <img src="https://abrakadabra.fun/uploads/posts/2022-02/thumbs/1644215923_1-abrakadabra-fun-p-tarelka-s-yedoi-na-prozrachnom-fone-2.png" 
+                width=600px height=auto title="Ням :)" style="margin-top: 50px;" alt="Изображение">
+            
+        </div>
+    </body>
+</html>

@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Добавить ингредиент</title>
+        <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    </head>
+    <body>
+        <div class="hhead">
+            <div id="header" title="На главную">
+                <a href="{% url 'house' %}"><ul>
+                    <p style="color: black;"> Cooking</p>
+                    <p style="color: rgb(0, 202, 67);">Library</p>
+                </ul></a>
+            </div>
+            <div id="header2">
+                <div id="header21">
+                    <a href="{% url 'profile_page' %}" title="Нажмите, чтобы перейти в свой профиль">Мой профиль</a>
+                </div>
+                <div id="header22" class="input-group flex-nowrap">
+                    <input type="search" class="form-control" placeholder="Введите название блюда" aria-describedby="addon-wrapping">
+                    <span class="input-group-text" id="search" width="100px">Поиск</span>
+                </div>
+            </div>
+        </div>
+
+        <form id="addrec" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>Новый ингредиент:</p>
+            <div id="addrec1">
+                <ul>{{ form.category }}</ul>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="nazvanie">Название ингредиента</span>
+                    {{ form.name_product }}
+                </div><br>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="kkal">Калорийность</span>
+                    {{ form.product_calories }}
+                </div><br>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="kkal">Количество (г)</span>
+                    {{ form.mass }}
+                </div><br>
+            </div>
+            <button type="submit" id="add" class="btn btn-outline-dark" style="margin-left: 44%;">Добавить ингредиент</button>
+        </form>
+    </body>
+</html>

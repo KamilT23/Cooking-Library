@@ -1,0 +1,52 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Регистрация</title>
+        <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    </head>
+    <body>
+        <span class="back">
+            <a href="../welcome"><p title="Нажмите, чтобы вернуться">Назад</p></a>
+        </span>
+        <div id="headerRA" title="CookingLibrary">
+            <ul>
+                <p> Cooking</p>
+                <p style="color: rgb(0, 202, 67);">Library</p>
+            </ul>
+        </div>
+
+        <form id="main-form" method="post">
+            {% csrf_token %}
+            <div class="form-error">{{ form.non_field_errors }}</div>
+            <p>Регистрация</p>
+            <span><font color="red"> {{ error }} </font></span><br>
+            <div class="input-group">
+                <span class="input-group-text">Имя и фамилия</span>
+                {{ form.first_name }}
+                {{ form.last_name }}
+            </div><br>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="username">@</span>
+                {{ form.username }}
+            </div><br>
+
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="email">Почта</span>
+                {{ form.email }}
+            </div><br>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="pass">Пароль</span>
+                {{ form.password1 }}
+            </div><br>
+            <div class="input-group flex-nowrap">
+                <span class="input-group-text" id="repass">Подтверждение пароля</span>
+                {{ form.password2 }}
+            </div><br>
+
+            <button type="submit" class="btn btn-outline-dark">Зарегистрироваться</button><br>
+        </form>
+    </body>
+</html>

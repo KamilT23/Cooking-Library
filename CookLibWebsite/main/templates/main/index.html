@@ -1,0 +1,158 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Главная страница</title>
+        <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    </head>
+    <body>
+        <div class="hhead">
+            <div id="header" title="CookingLibrary">
+                <ul>
+                    <p style="color: black;"> Cooking</p>
+                    <p style="color: rgb(0, 202, 67);">Library</p>
+                </ul>
+
+
+            </div>
+            <div id="header2">
+                <div id="header21">
+                    {% if request.user.is_authenticated %}
+                    <a href="{% url 'profile_page' %}" title="Нажмите, чтобы перейти в свой профиль">@{{user.username}}</a>|<a href="{% url 'exit_page' %}">Выйти</a>
+                    {% endif %}
+                </div>
+                <div id="header22" class="input-group flex-nowrap">
+                    <form id="form-search" action="{% url 'search_results' %}" method="get">
+                        <input width=150px name="q" type="text" class="form-control" placeholder="Введите название блюда" aria-describedby="addon-wrapping">
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+        <div style="margin-top: 150px;">
+            <div class="KatR">
+                <h1>Завтраки</h1>
+                {% for r in recipes.all %}
+                    {% if r.category == '1' %}
+                    <ul>
+                        <a href="{% url 'recipe' r.slug %}"> {{r.title_recipe}} </a>
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+                {% if request.user.is_superuser %}
+                <a href="{% url 'addrecipe_page' %}"><button type="button" class="btn btn-outline-dark">Добавить рецепт</button></a>
+                {% endif %}
+            </div>
+            <div class="picL">
+                <img src="https://imgpng.ru/d/porridge_PNG7.png"
+                width=550px height=auto alt="Изображение">
+            </div>
+        </div>
+        <div>
+            <div class="picR">
+                <img src="https://imgpng.ru/d/pasta_PNG87.png"
+                width=550px height=auto alt="Изображение">
+            </div>
+            <div class="KatL">
+
+                <h1>Основные блюда</h1>
+                {% for r in recipes.all %}
+                    <ul>
+                        <a href="{% url 'recipe' r.slug %}" >
+                            {% if r.category == '2' %}
+                                {{r.title_recipe}}
+                            {% endif %}
+                        </a>
+                    </ul>
+                {% endfor %}
+                {% if request.user.is_superuser %}
+                <a href="{% url 'addrecipe_page' %}"><button type="button" class="btn btn-outline-dark">Добавить рецепт</button></a>
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <div class="KatR">
+
+                <h1>Закуски</h1>
+                {% for r in recipes.all %}
+                    {% if r.category == '3' %}
+                    <ul>
+                        <a href="{% url 'recipe' r.slug %}"> {{r.title_recipe}} </a>
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+                {% if request.user.is_superuser %}
+                <a href="{% url 'addrecipe_page' %}"><button type="button" class="btn btn-outline-dark">Добавить рецепт</button></a>
+                {% endif %}
+            </div>
+            <div class="picL">
+                <img src="https://казань.колобок-кафе.рф/wp-content/uploads/2016/09/Сырная-тарелка.png"
+                width=500px height=auto alt="Изображение">
+            </div>
+        </div>
+        <div>
+            <div class="picR">
+                <img src="https://imgpng.ru/d/soup_PNG5.png"
+                width=500px height=auto alt="Изображение">
+            </div>
+            <div class="KatL">
+                <h1>Супы</h1>
+
+                {% for r in recipes.all %}
+                    {% if r.category == '4' %}
+                    <ul>
+                        <a href="{% url 'recipe' r.slug %}"> {{r.title_recipe}} </a>
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+                {% if request.user.is_superuser %}
+                <a href="{% url 'addrecipe_page' %}"><button type="button" class="btn btn-outline-dark">Добавить рецепт</button></a>
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <div class="KatR">
+                <h1>Салаты</h1>
+
+                {% for r in recipes.all %}
+                    {% if r.category == '5' %}
+                    <ul>
+                        <a href="{% url 'recipe' r.slug %}"> {{r.title_recipe}} </a>
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+                {% if request.user.is_superuser %}
+                <a href="{% url 'addrecipe_page' %}"><button type="button" class="btn btn-outline-dark">Добавить рецепт</button></a>
+                {% endif %}
+            </div>
+            <div class="picL">
+                <img src="https://www.pngmart.com/files/1/Salad-Transparent-Background.png"
+                width=550px height=auto alt="Изображение">
+            </div>
+        </div>
+        <div>
+            <div class="picR">
+                <img src="https://free-png.ru/wp-content/uploads/2022/06/free-png.ru-864.png"
+                width=500px height=auto alt="Изображение">
+            </div>
+            <div class="KatL">
+                <h1>Выпечка и десерты</h1>
+
+                {% for r in recipes.all %}
+                    {% if r.category == '6' %}
+                    <ul>
+                        <a href="{% url 'recipe' r.slug %}"> {{r.title_recipe}} </a>
+                    </ul>
+                    {% endif %}
+                {% endfor %}
+                {% if request.user.is_superuser %}
+                <a href="{% url 'addrecipe_page' %}"><button type="button" class="btn btn-outline-dark">Добавить рецепт</button></a>
+                {% endif %}
+            </div>
+        </div>
+
+    </body>
+</html>

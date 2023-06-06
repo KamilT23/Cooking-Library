@@ -1,0 +1,50 @@
+{% load static %}
+{% load main_tags %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{recipe.title_recipe}}</title>
+        <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    </head>
+    <body>
+        <div class="hhead">
+            <div id="header" title="На главную">
+                <a href='/'><ul>
+                    <p style="color: black;"> Cooking</p>
+                    <p style="color: rgb(0, 202, 67);">Library</p>
+                </ul></a>
+            </div>
+            <div id="header2">
+                <div id="header21">
+                    <a href="{% url 'profile_page' %}" title="Нажмите, чтобы перейти в свой профиль">Мой профиль</a>
+                </div>
+                <div id="header22" class="input-group flex-nowrap">
+                    <input type="search" class="form-control" placeholder="Введите название блюда" aria-describedby="addon-wrapping">
+                    <span class="input-group-text" id="search" width="100px">Поиск</span>
+                </div>
+            </div>
+        </div>
+        <div id="ovskasha">
+            <h1>{{recipe.title_recipe}}</h1>
+            <p><i class="fa-solid fa-fire"></i> {{recipe.count_calories}} Ккал</p>
+            <p><i class="fa-regular fa-shapes"></i> {{recipe.count_servings}} порции</p>
+            <p><i class="fa-solid fa-circle"></i> {{recipe.need_time}} мин</p>
+            <p style="font-weight: 600;">Ингредиенты:</p>
+            <ul>
+                {% for r in recipe.need_products.all %}
+                <p>{{ r.name_product }}........................................... {{ r.mass }} гр</p>
+                {% endfor %}
+            </ul>
+            <p style="font-weight: 600;">Инструкция приготовления:</p>
+            <p>{{ recipe.recipe_description|linebreaks }}</p>
+            <a href="{% url 'add_favourite' recipe.slug %}"><button type="button" class="btn btn-outline-dark">Добавить в избранные рецепты</button></a>
+            {% if request.user.is_superuser %}
+            <a href="{% url 'delete_recipe' recipe.slug %}"><button type="button" class="btn btn-outline-danger">Удалить рецепт</button></a><br><br>
+            <a href="{% url 'update_recipe' recipe.slug %}"><button type="button" class="btn btn-outline-dark">Изменить рецепт</button></a>
+            {% endif %}
+        </div>
+
+    </body>
+</html>
